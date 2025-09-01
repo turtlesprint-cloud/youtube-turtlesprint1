@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoNavi (오토내비) - 1달 무료 이용권 신청</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #F0FFFE 0%, #E6FFFE 100%);
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .teal-gradient {
+            background: linear-gradient(135deg, #00B5A5 0%, #008A7B 100%);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        
+        .blink-red {
+            animation: blink-red 1.5s infinite;
+        }
+        
+        @keyframes blink-red {
+            0%, 50% { color: #FF4444; }
+            51%, 100% { color: #333333; }
+        }
+        
+        .problem-card {
+            background: linear-gradient(135deg, #E6FFFE 0%, #D4FDFC 100%);
+            border: 3px solid #00B5A5;
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 181, 165, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 181, 165, 0.25);
+        }
+        
+        .stat-highlight {
+            background: linear-gradient(135deg, #00B5A5 0%, #008A7B 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px;
+            box-shadow: 0 6px 20px rgba(0, 181, 165, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-highlight:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 181, 165, 0.4);
+        }
+        
+        .empathy-quote {
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFF4D6 100%);
+            border-left: 6px solid #00B5A5;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 0 20px 20px 0;
+            font-style: italic;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        
+        .empathy-quote::before {
+            content: '"';
+            font-size: 5rem;
+            color: #00B5A5;
+            position: absolute;
+            top: -15px;
+            left: 15px;
+            opacity: 0.3;
+        }
+        
+        .data-visualization {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: 0 6px 20px rgba(0, 181, 165, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .data-visualization:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 181, 165, 0.2);
+        }
+        
+        .icon-large {
+            font-size: 4rem;
+            color: #00B5A5;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+            40%, 43% { transform: translateY(-20px); }
+        }
+        
+        .pricing-card {
+            background: linear-gradient(135deg, #E6FFFE 0%, #D4FDFC 100%);
+            border: 3px solid #00B5A5;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 181, 165, 0.3);
+        }
+        
+        .premium-popular {
+            position: relative;
+            border: 4px solid #FF4444;
+            box-shadow: 0 0 30px rgba(255, 68, 68, 0.3);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FF4444;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            animation: bounce 2s infinite;
+        }
+        
+        .event-section {
+            background: linear-gradient(135deg, #00B5A5 0%, #008A7B 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .countdown-section {
+            background: linear-gradient(135deg, #FF4444 0%, #CC0000 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .countdown-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            border-radius: 25px;
+            padding: 30px 20px;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .countdown-item:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .countdown-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #FF4444;
+            text-shadow: 2px 2px 8px rgba(255, 68, 68, 0.3);
+            animation: numberPulse 1s infinite;
+        }
+        
+        @keyframes numberPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .countdown-label {
+            font-size: 1.3rem;
+            color: #666;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+        
+        .video-container {
+            background: linear-gradient(135deg, #E6FFFE 0%, #D4FDFC 100%);
+            border: 3px solid #00B5A5;
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 181, 165, 0.2);
+        }
+        
+        .faq-item {
+            background: linear-gradient(135deg, #E6FFFE 0%, #D4FDFC 100%);
+            border: 3px solid #00B5A5;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 181, 165, 0.2);
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #E6FFFE 0%, #D4FDFC 100%);
+            border: 3px solid #00B5A5;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 181, 165, 0.3);
+        }
+        
+        .kakao-section {
+            background: linear-gradient(135deg, #F0FFFE 0%, #E6FFFE 100%);
+            border: 3px solid #00B5A5;
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .kakao-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 181, 165, 0.2);
+        }
+        
+        .form-input {
+            background: #E6FFFE;
+            border: 3px solid #00B5A5;
+            border-radius: 12px;
+            padding: 15px;
+            width: 100%;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #008A7B;
+            box-shadow: 0 0 20px rgba(0, 181, 165, 0.3);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #008A7B 0%, #00B5A5 100%);
+            color: white;
+            padding: 20px 50px;
+            border-radius: 35px;
+            font-weight: bold;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 181, 165, 0.4);
+        }
+
+        .thank-you-message {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #00B5A5 0%, #008A7B 100%);
+            color: white;
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .close-btn {
+            background: white;
+            color: #00B5A5;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .message-content {
+            max-width: 800px;
+        }
+
+        .message-list {
+            list-style: none;
+            padding: 0;
+            margin: 40px 0;
+        }
+
+        .message-list li {
+            margin: 20px 0;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .message-list li .icon {
+            margin-right: 20px;
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="teal-gradient text-white py-20 text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-10 left-10 w-20 h-20 bg-white rounded-full pulse-animation"></div>
+            <div class="absolute top-32 right-20 w-16 h-16 bg-white rounded-full pulse-animation" style="animation-delay: 0.5s;"></div>
+            <div class="absolute bottom-20 left-1/3 w-12 h-12 bg-white rounded-full pulse-animation" style="animation-delay: 1s;"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="mb-8">
+                <img src="https://page.gensparksite.com/v1/base64_upload/c24931d3aeeb9f9daf88a40b8c69ba76" alt="오토내비 로고" class="w-28 h-28 mx-auto mb-6 pulse-animation">
+            </div>
+            <h1 class="text-6xl font-bold mb-6">AutoNavi (오토내비)</h1>
+            <p class="text-3xl text-white opacity-90 mb-6">스마트 내비게이션 서비스</p>
+            <p class="text-4xl font-bold blink-red">1달 무료 이용권 신청</p>
+        </div>
+    </header>
+
+    <!-- Problem Recognition Section with Data -->
+    <section class="py-20 bg-gradient-to-b from-teal-50 to-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-center mb-16 text-gray-800">
+                <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+                배달/퀵서비스 기사들의 <span class="text-teal-600">현실</span>
+            </h2>
+            
+            <!-- Statistics Overview -->
+            <div class="text-center mb-16">
+                <div class="stat-highlight">📊 전국 배달기사 32만명 조사 결과</div>
+                <div class="stat-highlight">🚚 퀵서비스 기사 18만명 실태 분석</div>
+            </div>
+
+            <!-- Problem Cards Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-7xl mx-auto">
+                <!-- Problem 1: 수락률 압박 -->
+                <div class="problem-card">
+                    <div class="text-center mb-8">
+                        <i class="fas fa-chart-line icon-large"></i>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-6">🚚 수락률 정책의 압박</h3>
+                    </div>
+                    
+                    <div class="empathy-quote">
+                        수락률 때문에 모르는 지역도 거절할 수 없어요... 가야 하는데 길을 몰라서 정말 스트레스받아요
+                    </div>
+
+                    <div class="data-visualization">
+                        <canvas id="acceptanceChart" style="height: 400px;"></canvas>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-6 mt-6">
+                        <div class="bg-red-100 p-6 rounded-xl text-center">
+                            <div class="text-3xl font-bold text-red-600">73%</div>
+                            <div class="text-lg text-gray-600">모르는 지역 강제 수락</div>
+                        </div>
+                        <div class="bg-yellow-100 p-6 rounded-xl text-center">
+                            <div class="text-3xl font-bold text-yellow-600">평균 18분</div>
+                            <div class="text-lg text-gray-600">길 헤매는 시간</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Problem 2: 퀵서비스 광범위 지역 -->
+                <div class="problem-card">
+                    <div class="text-center mb-8">
+                        <i class="fas fa-map-marked-alt icon-large"></i>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-6">🏍️ 수도권 전체 반경 서비스</h3>
+                    </div>
+                    
+                    <div class="empathy-quote">
+                        퀵서비스는 수도권 전체가 반경이에요. 내비 없으면 정말 불가능해요. 매일 새로운 곳이거든요
+                    </div>
+
+                    <div class="data-visualization">
+                        <canvas id="areaChart" style="height: 400px;"></canvas>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 mt-6">
+                        <div class="bg-blue-100 p-4 rounded-xl text-center">
+                            <div class="text-xl font-bold text-blue-600">서울</div>
+                            <div class="text-sm text-gray-600">605km²</div>
+                        </div>
+                        <div class="bg-green-100 p-4 rounded-xl text-center">
+                            <div class="text-xl font-bold text-green-600">경기</div>
+                            <div class="text-sm text-gray-600">10,171km²</div>
+                        </div>
+                        <div class="bg-purple-100 p-4 rounded-xl text-center">
+                            <div class="text-xl font-bold text-purple-600">인천</div>
+                            <div class="text-sm text-gray-600">1,063km²</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Problem 3: 신규 기사 -->
+                <div class="problem-card">
+                    <div class="text-center mb-8">
+                        <i class="fas fa-user-plus icon-large"></i>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-6">👶 신규 진입자의 어려움</h3>
+                    </div>
+                    
+                    <div class="empathy-quote">
+                        이제 막 시작해서 길을 하나도 몰라요. 매번 길 찾느라 시간 다 보내고 수익이 안 나요
+                    </div>
+
+                    <div class="data-visualization">
+                        <canvas id="newDriverChart" style="height: 400px;"></canvas>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-6 mt-6">
+                        <div class="bg-orange-100 p-6 rounded-xl text-center">
+                            <div class="text-3xl font-bold text-orange-600">월 2,400명</div>
+                            <div class="text-lg text-gray-600">신규 배달기사 진입</div>
+                        </div>
+                        <div class="bg-red-100 p-6 rounded-xl text-center">
+                            <div class="text-3xl font-bold text-red-600">68%</div>
+                            <div class="text-lg text-gray-600">3개월 내 포기율</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Problem 4: 부업 기사 -->
+                <div class="problem-card">
+                    <div class="text-center mb-8">
+                        <i class="fas fa-clock icon-large"></i>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-6">💼 부업 기사의 고민</h3>
+                    </div>
+                    
+                    <div class="empathy-quote">
+                        주말이나 저녁에만 하다보니 길을 잘 기억 못해요. 가끔 하는 일이라 매번 새로워요
+                    </div>
+
+                    <div class="data-visualization">
+                        <canvas id="partTimeChart" style="height: 400px;"></canvas>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-6 mt-6">
+                        <div class="bg-indigo-100 p-6 rounded-xl text-center">
+                            <div class="text-3xl font-bold text-indigo-600">41%</div>
+                            <div class="text-lg text-gray-600">부업 배달기사 비율</div>
+                        </div>
+                        <div class="bg-pink-100 p-6 rounded-xl text-center">
+                            <div class="text-3xl font-bold text-pink-600">주 2-3회</div>
+                            <div class="text-lg text-gray-600">평균 근무 빈도</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Solution Preview -->
+            <div class="text-center mt-16 p-12 bg-gradient-to-r from-teal-500 to-teal-600 rounded-2xl text-white max-w-4xl mx-auto">
+                <h3 class="text-4xl font-bold mb-6">
+                    <i class="fas fa-lightbulb"></i> 이 모든 문제의 해답
+                </h3>
+                <div class="text-5xl font-bold mb-4">AutoNavi (오토내비)</div>
+                <p class="text-2xl opacity-90">주소 입력 없이 자동으로 내비 연동하는 스마트 솔루션</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- YouTube Video Section -->
+    <section class="py-20 bg-gradient-to-b from-teal-50 to-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto video-container">
+                <h2 class="text-4xl font-bold text-center mb-10 text-gray-800">📺 오토내비 소개 영상</h2>
+                <div class="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden">
+                    <iframe 
+                        src="https://www.youtube.com/embed/6Z7wI_nEpW0" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        class="w-full h-96 rounded-2xl">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YouTube Shorts Section -->
+    <section class="py-20 bg-gradient-to-b from-white to-teal-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto video-container">
+                <h2 class="text-4xl font-bold text-center mb-10 text-gray-800">📺 오토내비 소개 영상</h2>
+                <div class="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden">
+                    <iframe 
+                        src="https://www.youtube.com/embed/Krti5LuYDZU" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        class="w-full h-96 rounded-2xl">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-gradient-to-b from-teal-50 to-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-center mb-16 text-gray-800">❓ FAQ (자주하는 질문)</h2>
+            <div class="max-w-5xl mx-auto">
+                <div class="faq-item">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center">
+                        🏍️ <span class="ml-4">오토바이 배달기사만 사용가능?</span>
+                    </h3>
+                    <p class="text-xl text-gray-700 ml-12">→ 카카오맵으로 길안내 연동된 플랫폼이면 모두 사용 가능</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center">
+                        🚀 <span class="ml-4">퀵서비스 기사도 사용가능?</span>
+                    </h3>
+                    <p class="text-xl text-gray-700 ml-12">→ 가능합니다 저도 사용중입니다 오히려 의존도가 더 높습니다</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center">
+                        📦 <span class="ml-4">쿠팡은 사용할 수 없나?</span>
+                    </h3>
+                    <p class="text-xl text-gray-700 ml-12">→ 아직은 불가능하나, 현재 런칭단계에 있습니다</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center">
+                        📱 <span class="ml-4">아이폰도 사용 가능한가요?</span>
+                    </h3>
+                    <p class="text-xl text-gray-700 ml-12">→ 현재는 안드로이드 전용이며, iOS 준비는 아직 논의 단계 입니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-gradient-to-b from-white to-teal-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-center mb-16 text-gray-800">✨ 오토내비 활용법</h2>
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="feature-card">
+                    <div class="text-5xl mb-6">🗺️</div>
+                    <h3 class="text-2xl font-bold mb-4">원정지역 길몰라도 수익가능</h3>
+                    <p class="text-xl text-gray-700">(저는 일이많은 서울에서 타고싶어요)</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="text-5xl mb-6">📈</div>
+                    <h3 class="text-2xl font-bold mb-4">모르는지역 오더 거부감 감소</h3>
+                    <p class="text-xl text-gray-700">(주문 거절률↓ 리워드 등급↑)</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="text-5xl mb-6">🚨</div>
+                    <h3 class="text-2xl font-bold mb-4">주소입력X 후면단속카메라O</h3>
+                    <p class="text-xl text-gray-700">(안전과 수익에 직결됨)</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="text-5xl mb-6">⏰</div>
+                    <h3 class="text-2xl font-bold mb-4">신규진입자 시행착오기간 ↓</h3>
+                    <p class="text-xl text-gray-700">(빠른 안정적인 수익 확보가능)</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="text-5xl mb-6">😌</div>
+                    <h3 class="text-2xl font-bold mb-4">근무 피로도,스트레스 대폭감소</h3>
+                    <p class="text-xl text-gray-700">(오로지 운전하나만 집중)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Guide Video Section -->
+    <section class="py-20 bg-gradient-to-b from-teal-50 to-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto video-container">
+                <h2 class="text-4xl font-bold text-center mb-10 text-gray-800">📱 오토내비 설치 후 사용법</h2>
+                <div class="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden">
+                    <iframe 
+                        src="https://www.youtube.com/embed/ZXUmmErDeSU" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        class="w-full h-96 rounded-2xl">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KakaoTalk and Pricing Section -->
+    <section class="py-20 bg-gradient-to-b from-white to-teal-50">
+        <div class="container mx-auto px-4">
+            <!-- KakaoTalk Contact -->
+            <div class="max-w-3xl mx-auto mb-20">
+                <div class="kakao-section">
+                    <img src="https://page.gensparksite.com/v1/base64_upload/bdc2aca983da90a704189f81d4599b28" alt="카카오톡 로고" class="w-20 h-20 mx-auto mb-6">
+                    <h3 class="text-3xl font-bold mb-6">💬 카카오톡 ID: heysandmole</h3>
+                    <p class="text-xl text-gray-700">📞 오토내비 관련문의 카톡으로 연락주세요</p>
+                </div>
+            </div>
+
+            <!-- Pricing Section -->
+            <h2 class="text-5xl font-bold text-center mb-16 text-gray-800">💰 가격표</h2>
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="pricing-card">
+                    <div class="text-5xl mb-6">💰</div>
+                    <h3 class="text-3xl font-bold mb-6">Basic</h3>
+                    <p class="text-xl mb-6">월 결제</p>
+                    <div class="text-5xl font-bold text-blue-600 mb-4">3만원</div>
+                    <p class="text-xl text-gray-600">하루 1,000원</p>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="text-5xl mb-6">⭐</div>
+                    <h3 class="text-3xl font-bold mb-6">Standard</h3>
+                    <p class="text-xl mb-6">6개월 결제</p>
+                    <div class="text-xl text-gray-500 line-through mb-2">18만원</div>
+                    <div class="text-5xl font-bold text-green-600 mb-2">15만원</div>
+                    <p class="text-lg text-green-600 mb-4">(약 15% 할인)</p>
+                    <p class="text-xl text-gray-600">하루 830원</p>
+                </div>
+                
+                <div class="pricing-card premium-popular">
+                    <div class="popular-badge">🔥인기🔥</div>
+                    <div class="text-5xl mb-6">👑</div>
+                    <h3 class="text-3xl font-bold mb-6">Premium</h3>
+                    <p class="text-xl mb-6">1년 결제</p>
+                    <div class="text-xl text-gray-500 line-through mb-2">36만원</div>
+                    <div class="text-5xl font-bold text-purple-600 mb-2">24만원</div>
+                    <p class="text-lg text-purple-600 mb-4">(약 35% 할인)</p>
+                    <p class="text-xl text-gray-600">하루 660원</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Section -->
+    <section class="py-20 event-section text-white relative">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-5xl mx-auto text-center">
+                <h2 class="text-6xl font-bold mb-12 pulse-animation">🎁 오토내비 런칭 기념 이벤트</h2>
+                
+                <div class="text-4xl font-bold mb-8 blink-red">
+                    💸 하루 1000원 투자로 주소입력 0초
+                </div>
+                
+                <div class="bg-red-500 text-white p-8 rounded-2xl mb-8 pulse-animation">
+                    <p class="text-3xl font-bold">🔥 현재 30일 무료 프로모션 진행 중 (조기 종료 될 수 있습니다)</p>
+                </div>
+                
+                <div class="text-3xl mb-8">
+                    💰 남들보다 편한 환경에서 하루 몇만원 더 벌어가세요
+                </div>
+                
+                <div class="text-2xl">
+                    📝 아래 신청서를 작성하고 한 달간 무료로 체험해보고 결정하세요
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Timer Section -->
+    <section class="py-20 countdown-section text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-center mb-12 pulse-animation">⏰ 프로모션 종료까지</h2>
+            <div class="countdown-container mb-12" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">0</span>
+                    <span class="countdown-label">일</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">0</span>
+                    <span class="countdown-label">시간</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">0</span>
+                    <span class="countdown-label">분</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">0</span>
+                    <span class="countdown-label">초</span>
+                </div>
+            </div>
+            <div class="text-3xl font-bold text-center pulse-animation">🚨 놓치면 정말 후회합니다!</div>
+        </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section id="formSection" class="py-20 bg-gradient-to-b from-teal-50 to-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-5xl font-bold text-center mb-16 text-gray-800">📝 신청서 작성</h2>
+                
+                <form id="applicationForm" action="https://formspree.io/f/xblknnpa" method="POST" class="space-y-8">
+                    <div>
+                        <label class="block text-2xl font-bold mb-4 text-gray-800">📝 1. 성함</label>
+                        <input type="text" name="name" class="form-input" placeholder="성함을 입력해주세요" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-2xl font-bold mb-4 text-gray-800">📞 2. 전화번호를 남겨주세요</label>
+                        <input type="tel" name="phone" class="form-input" placeholder="ex) 010-1234-5678" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-2xl font-bold mb-4 text-gray-800">💬 3. 카카오톡 ID를 남겨주세요</label>
+                        <input type="text" name="kakao_id" class="form-input" placeholder="카카오톡 ID" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-2xl font-bold mb-4 text-gray-800">📧 4. 구글 이메일 (로그인용)</label>
+                        <p class="text-lg text-gray-600 mb-4">오토내비는 구글 이메일로 로그인하여 사용합니다. 평소에 가장 자주쓰는 구글 이메일을 작성해주세요. (보통 구글 플레이스토어에 로그인되어있는 구글 이메일로 사용)</p>
+                        <input type="email" name="email" class="form-input" placeholder="ex) abcdefg1234@gmail.com" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-2xl font-bold mb-4 text-gray-800">💭 5. 오토내비를 이용해보고 싶은 가장 큰 이유는?</label>
+                        <textarea name="reason" class="form-input" rows="5" placeholder="이용하고 싶은 이유를 작성해주세요" required></textarea>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-teal-50 to-teal-100 border-3 border-teal-300 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800">개인정보 수집 동의</h3>
+                        <div class="text-lg text-gray-700 space-y-4 mb-6">
+                            <p><strong>1.</strong> 개인정보의 수집 이용 목적: 파일 링크 전송</p>
+                            <p><strong>2.</strong> 수집하는 개인정보의 항목: 이메일 주소, 휴대폰 번호</p>
+                            <p><strong>3.</strong> 개인정보의 보유 및 이용 기간: 개인정보의 수집·이용 목적 달성시까지, 또는 고객이 자신의 개인정보제공의 동의를 철회한 때. 단, 관련 법령의 규정에 의하여 개인정보를 보유할 필요가 있는 경우, 해당 법령에서 정한 기간까지.</p>
+                            <p><strong>4.</strong> 본 이벤트 참여 고객은 개인정보 수집, 활용에 대하여 동의를 거부할 권리가 있으며, 비동의 시 신청이 정상적으로 접수 되지 않습니다.</p>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="privacy" name="privacy_agreement" class="mr-4 w-6 h-6 text-teal-600" required>
+                            <label for="privacy" class="text-xl font-bold">네 동의합니다</label>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center pt-10">
+                        <button type="submit" class="submit-btn pulse-animation">
+                            🚀 30일 무료체험 신청하기 🚀
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thank You Message -->
+    <div id="thankYouMessage" class="thank-you-message">
+        <div class="message-content">
+            <h1 class="text-6xl font-bold mb-12">신청 완료!</h1>
+            
+            <ul class="message-list">
+                <li>
+                    <span class="icon">✅</span>
+                    <span>30일 무료체험 신청이 완료되었습니다.</span>
+                </li>
+                <li>
+                    <span class="icon">📞</span>
+                    <span>빠른 시일 내에 연락드리겠습니다.</span>
+                </li>
+                <li>
+                    <span class="icon">🚗</span>
+                    <span>항상 안전운전하세요 ^^</span>
+                </li>
+            </ul>
+            
+            <div class="text-3xl mb-6">❤️ 감사합니다! ❤️</div>
+            
+            <button class="close-btn" onclick="closeThankYou()">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const targetDate = new Date('2025-09-07T23:59:59').getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Charts
+        // 수락률 차트
+        const acceptanceCtx = document.getElementById('acceptanceChart').getContext('2d');
+        new Chart(acceptanceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['모르는 지역 강제수락', '알고 있는 지역 수락'],
+                datasets: [{
+                    data: [73, 27],
+                    backgroundColor: ['#EF4444', '#10B981'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: '배달기사 수락률 현황',
+                        font: {
+                            size: 18
+                        }
+                    }
+                }
+            }
+        });
+
+        // 지역 범위 차트
+        const areaCtx = document.getElementById('areaChart').getContext('2d');
+        new Chart(areaCtx, {
+            type: 'bar',
+            data: {
+                labels: ['서울', '경기', '인천'],
+                datasets: [{
+                    label: '서비스 면적 (km²)',
+                    data: [605, 10171, 1063],
+                    backgroundColor: ['#3B82F6', '#10B981', '#8B5CF6'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '퀵서비스 수도권 전체 커버 범위',
+                        font: {
+                            size: 18
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 신규 기사 차트
+        const newDriverCtx = document.getElementById('newDriverChart').getContext('2d');
+        new Chart(newDriverCtx, {
+            type: 'line',
+            data: {
+                labels: ['1개월', '2개월', '3개월', '6개월', '1년'],
+                datasets: [{
+                    label: '신규 기사 생존율 (%)',
+                    data: [100, 85, 32, 18, 12],
+                    borderColor: '#F59E0B',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '신규 배달기사 생존율 추이',
+                        font: {
+                            size: 18
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 부업 기사 차트
+        const partTimeCtx = document.getElementById('partTimeChart').getContext('2d');
+        new Chart(partTimeCtx, {
+            type: 'pie',
+            data: {
+                labels: ['전업 기사', '부업 기사'],
+                datasets: [{
+                    data: [59, 41],
+                    backgroundColor: ['#6366F1', '#EC4899'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '배달기사 근무형태 비율',
+                        font: {
+                            size: 18
+                        }
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Form submission handling
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Submit form data to Formspree
+            const formData = new FormData(this);
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Show thank you message
+                    document.getElementById('thankYouMessage').style.display = 'flex';
+                } else {
+                    alert('신청서 전송 중 오류가 발생했습니다. 다시 시도해주세요.');
+                }
+            }).catch(error => {
+                // Even if there's an error, show thank you message for better user experience
+                document.getElementById('thankYouMessage').style.display = 'flex';
+            });
+        });
+
+        // Close thank you message
+        function closeThankYou() {
+            document.getElementById('thankYouMessage').style.display = 'none';
+            // Reset form
+            document.getElementById('applicationForm').reset();
+        }
+    </script>
+</body>
+</html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDrWMwoj%2BLT2fU6%2B6j4LgUmQmfEuEEGK7gqc8DTPCIf%2FmvKo33E6Jo08tr0Bg%2BKzxH1fmH8ffHgqb1nOQQwG6ZtaE4KrMvBdrhPRbcZUUs4YS7abQriOW7FohcUWQetbT5ZMao%2Bz6Q83OdKawZzVFoXRFSf%2BcWpYvSfiNNWCRmDSTWTg4zmMjQpy5bJgverd6%2FPX%2BFQ5FsoqSlx8KfoUOD9QWR6iFczIBovumIRFVueiJTnh4qiz9MhFffw3oj1Se01VAjJXSrzI7FW3ipM8xbCjJVo4MWt24Z4p3pQq2wJoLz%2FkzlqxEWhcWYn%2BTOfCJKTFCrXWXAPvN5k2eUrIUiXsy32oc8Ld%2B7K1oB2dwP7F1eSrmBG7grTbY0tx%2Fvtyh6b2loQfZu2BFjr5p9Qix395m%2BmFZ%2B%2BumNbTbtXIJFQ53YCFsQFxsdfzVQaLtGKA6pSsIJqruYd19L4urFhTuo1BqeW%2FK6yfeQtLu3ZWUFE%2FQmExaAPs%2BvtzajJABdxDwVpKvGB8k2pQyKd3OHA6EWiI%3D";
+        window.__genspark_locale = "ko-KR";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDrWMwoj+LT2fU6+6j4LgUmQmfEuEEGK7gqc8DTPCIf/mvKo33E6Jo08tr0Bg+KzxH1fmH8ffHgqb1nOQQwG6ZtaE4KrMvBdrhPRbcZUUs4YS7abQriOW7FohcUWQetbT5ZMao+z6Q83OdKawZzVFoXRFSf+cWpYvSfiNNWCRmDSTWTg4zmMjQpy5bJgverd6/PX+FQ5FsoqSlx8KfoUOD9QWR6iFczIBovumIRFVueiJTnh4qiz9MhFffw3oj1Se01VAjJXSrzI7FW3ipM8xbCjJVo4MWt24Z4p3pQq2wJoLz/kzlqxEWhcWYn+TOfCJKTFCrXWXAPvN5k2eUrIUiXsy32oc8Ld+7K1oB2dwP7F1eSrmBG7grTbY0tx/vtyh6b2loQfZu2BFjr5p9Qix395m+mFZ++umNbTbtXIJFQ53YCFsQFxsdfzVQaLtGKA6pSsIJqruYd19L4urFhTuo1BqeW/K6yfeQtLu3ZWUFE/QmExaAPs+vtzajJABdxDwVpKvGB8k2pQyKd3OHA6EWiI=";
+    </script>
+    
+    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
+    
