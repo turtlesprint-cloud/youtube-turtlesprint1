@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurtleSprint 광고단가 안내서</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+        
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            background: white;
+        }
+        
+        .header {
+            background: #000000;
+            color: white;
+            padding: 72px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+        
+        .channel-name {
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 24px;
+            letter-spacing: 0.8px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+            text-align: center;
+        }
+        
+        .header p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            font-weight: 300;
+        }
+        
+        .content {
+            padding: 48px 40px;
+        }
+        
+        .vling-data {
+            background: #fafafa;
+            border: none;
+            padding: 36px;
+            margin-bottom: 48px;
+            position: relative;
+        }
+        
+        .vling-badge {
+            position: absolute;
+            top: -1px;
+            right: 36px;
+            background: #000;
+            color: white;
+            padding: 6px 16px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        .vling-data h3 {
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .vling-data h3::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: #000;
+            margin-right: 12px;
+        }
+        
+        .vling-logo {
+            background: #ff006e;
+            color: white;
+            padding: 2px 8px;
+            font-size: 10px;
+            margin-left: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .vling-data p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #4a4a4a;
+            margin-left: 16px;
+        }
+        
+        .vling-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin: 24px 0;
+            background: white;
+            border: 1px solid #e5e5e5;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 24px 16px;
+            border-right: 1px solid #e5e5e5;
+        }
+        
+        .stat-item:last-child {
+            border-right: none;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 8px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        
+        .stat-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: -0.3px;
+        }
+        
+        .pricing-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 36px;
+            text-align: center;
+            color: #000;
+            letter-spacing: -0.8px;
+        }
+        
+        .creator-notice {
+            background: linear-gradient(to right, #fff8f0, #fff5eb);
+            border-left: 4px solid #ff6b35;
+            padding: 32px 36px;
+            margin-bottom: 48px;
+            position: relative;
+        }
+        
+        .creator-notice::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #ff6b35, transparent);
+        }
+        
+        .creator-notice h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+        }
+        
+        .creator-notice p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .creator-notice .highlight {
+            color: #ff6b35;
+            font-weight: 600;
+        }
+        
+        .creator-notice .example {
+            color: #000;
+            font-weight: 600;
+        }
+        
+        .creator-notice .emphasis {
+            font-weight: 600;
+            color: #000;
+        }
+        
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+        
+        .pricing-card {
+            border: 1px solid #e5e5e5;
+            padding: 32px 24px;
+            transition: all 0.2s ease;
+            background: white;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+            border-color: #000;
+        }
+        
+        .pricing-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #000;
+            text-align: center;
+            letter-spacing: -0.3px;
+        }
+        
+        .price {
+            font-size: 30px;
+            font-weight: 800;
+            color: #000;
+            margin-bottom: 28px;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+        
+        .price small {
+            font-size: 12px;
+            color: #888;
+            font-weight: 400;
+            margin-left: 8px;
+            letter-spacing: 0;
+        }
+        
+        .features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+        
+        .features li {
+            padding: 10px 0 10px 20px;
+            font-size: 13px;
+            border-bottom: 1px solid #f5f5f5;
+            position: relative;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        .features li:last-child {
+            border-bottom: none;
+        }
+        
+        .features li:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 4px;
+            height: 4px;
+            background: #000;
+            border-radius: 50%;
+        }
+        
+        .description {
+            background: #f8f8f8;
+            padding: 16px;
+            font-size: 12px;
+            line-height: 1.7;
+            color: #555;
+            border-left: 2px solid #000;
+        }
+        
+        .description strong {
+            color: #000;
+            font-weight: 600;
+        }
+        
+        .evidence-section {
+            background: #fafafa;
+            padding: 48px;
+            margin: 48px -40px;
+            position: relative;
+        }
+        
+        .evidence-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #000;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+        
+        .evidence-subtitle {
+            text-align: center;
+            margin-bottom: 32px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .vling-visual {
+            background: white;
+            padding: 24px;
+            border: 1px solid #e5e5e5;
+            margin-bottom: 24px;
+        }
+        
+        .vling-visual-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .vling-mark {
+            background: #ff006e;
+            color: white;
+            padding: 4px 10px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .vling-visual-title {
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .tab-btn {
+            padding: 6px 16px;
+            border: 1px solid #e5e5e5;
+            background: #f5f5f5;
+            color: #888;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .tab-btn:hover {
+            background: #eeeeee;
+        }
+        
+        .tab-btn.active {
+            background: #ff006e;
+            color: white;
+            border-color: #ff006e;
+            font-weight: 600;
+        }
+        
+        .analysis-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .analysis-table thead {
+            background: #f8f8f8;
+        }
+        
+        .analysis-table th {
+            padding: 10px 12px;
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+            text-align: left;
+        }
+        
+        .analysis-table td {
+            padding: 12px;
+            border-bottom: 1px solid #f5f5f5;
+            font-size: 13px;
+        }
+        
+        .analysis-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .analysis-table tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+        
+        .analysis-table .type-col {
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .analysis-table .value-col {
+            font-weight: 600;
+            color: #000;
+        }
+        
+        .analysis-table .empty-col {
+            color: #999;
+        }
+        
+        .evidence-table {
+            background: white;
+            border: 1px solid #e5e5e5;
+            overflow: hidden;
+        }
+        
+        .evidence-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        .evidence-table th {
+            background: #000;
+            color: white;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.3px;
+        }
+        
+        .evidence-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #333;
+        }
+        
+        .evidence-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .evidence-table tr:hover {
+            background: #fafafa;
+        }
+        
+        .comparison-table {
+            overflow-x: auto;
+            margin: 48px 0;
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border: 1px solid #e5e5e5;
+        }
+        
+        .comparison-table th {
+            background: #f8f8f8;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            color: #000;
+            border-bottom: 2px solid #e5e5e5;
+            letter-spacing: 0.3px;
+        }
+        
+        .comparison-table td {
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+        
+        .comparison-table tr:hover {
+            background: #fafafa;
+        }
+        
+        .cta-section {
+            background: #000;
+            color: white;
+            padding: 64px 48px;
+            margin: 48px -40px -48px;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+        }
+        
+        .cta-section p {
+            font-size: 15px;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+        
+        .contact-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 32px;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .contact-info p {
+            margin: 12px 0;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        
+        .contact-info strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .contact-info .option {
+            font-family: 'Pretendard', sans-serif;
+            letter-spacing: 0.5px;
+        }
+        
+        .additional-terms {
+            background: white;
+            border: 1px solid #e5e5e5;
+            padding: 32px;
+            margin-top: 48px;
+        }
+        
+        .additional-terms h4 {
+            color: #000;
+            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+        
+        .additional-terms h4::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background: #000;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        .additional-terms ul {
+            list-style: none;
+            padding-left: 14px;
+        }
+        
+        .additional-terms li {
+            padding: 8px 0;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.7;
+            position: relative;
+        }
+        
+        .additional-terms li:before {
+            content: '·';
+            position: absolute;
+            left: -14px;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 48px 24px;
+            }
+            
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            .content {
+                padding: 32px 24px;
+            }
+            
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .vling-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-item {
+                border-right: none;
+                border-bottom: 1px solid #e5e5e5;
+            }
+            
+            .stat-item:last-child {
+                border-bottom: none;
+            }
+            
+            .evidence-section {
+                margin: 32px -24px;
+                padding: 32px 24px;
+            }
+            
+            .cta-section {
+                margin: 32px -24px -32px;
+                padding: 48px 24px;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="channel-name">퀵서비스배달기사TurtleSprint</div>
+            <h1>유튜브 광고단가 안내서</h1>
+            <p>블링 데이터 기반 투명한 광고 단가 안내</p>
+        </div>
+        
+        <div class="content">
+            <div class="vling-data">
+                <div class="vling-badge">Verified Data</div>
+                <h3>데이터 출처 및 산정 기준 <span class="vling-logo">Vling</span></h3>
+                <p>
+                    본 광고 단가는 <strong>유튜브 데이터 플랫폼 '블링(Vling)'</strong>에서 제공하는 실제 시장 데이터를 기반으로 책정되었습니다.<br>
+                    제시된 모든 금액은 <strong>블링 데이터의 중간값(Median)</strong>을 적용하여 시장 표준에 부합하는 합리적인 가격으로 산정하였습니다.<br>
+                    이는 개인적인 판단이나 추정이 아닌, <strong>객관적인 시장 데이터</strong>에 근거한 투명한 가격입니다.
+                </p>
+                
+                <div class="vling-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">브랜디드</div>
+                        <div class="stat-value">₩840,605~₩1,260,907</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">PPL</div>
+                        <div class="stat-value">₩560,403~₩840,604</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">쇼츠</div>
+                        <div class="stat-value">₩420,302~₩630,453</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="pricing-title">TurtleSprint 광고단가 안내</h2>
+            
+            <div class="creator-notice">
+                <h4>크리에이터 광고의 핵심 원칙</h4>
+                <p>
+                    유튜브 크리에이터 성격상 모든광고는 소재와 상관없이 팬이 해당 유튜버를 통해 영향을 받아 구매가 일어나는 작업이므로 <span class="highlight">반드시 팬에게 돌아가는 차별화 혜택이 존재해야 합니다</span><br><br>
+                    
+                    <span class="example">ex)</span> 기존의 일반구매와 달리 해당 유튜버의 광고를 보고 구매하게될경우 얻는장점이 반드시 있어야 합니다<br><br>
+                    
+                    즉, <span class="emphasis">작더라도 차별화의 요소가 반드시 존재해야합니다</span>
+                </p>
+            </div>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>브랜디드 PPL</h3>
+                    <div class="price">₩1,050,000 <small>부가세 별도</small></div>
+                    <ul class="features">
+                        <li>전용 에피소드 또는 메인 테마</li>
+                        <li>3-5분 이상 깊이 있는 소개</li>
+                        <li>전문 촬영 및 편집</li>
+                        <li>시안 1회 확인</li>
+                        <li>썸네일/제목 반영</li>
+                        <li>2차 활용 권리 협의 가능</li>
+                    </ul>
+                    <div class="description">
+                        <strong>이런 경우 추천:</strong> 신제품 론칭, 리브랜딩, 대규모 캠페인 등 브랜드 스토리를 깊이 있게 전달하고 싶으실 때
+                    </div>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>기획 PPL</h3>
+                    <div class="price">₩700,000 <small>부가세 별도</small></div>
+                    <ul class="features">
+                        <li>일상 콘텐츠 내 자연스러운 노출</li>
+                        <li>2-3분 스토리텔링 형식</li>
+                        <li>문제-해결 구성의 소개</li>
+                        <li>시안 1회 확인</li>
+                        <li>설명란 + 고정댓글 60일</li>
+                        <li>조회수 보장 (5,000뷰 미달 시 보상)</li>
+                    </ul>
+                    <div class="description">
+                        <strong>이런 경우 추천:</strong> 일반 프로모션, 자연스러운 제품 소개, 예산과 효율의 균형을 원하실 때
+                    </div>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>쇼츠 PPL</h3>
+                    <div class="price">₩530,000 <small>부가세 별도</small></div>
+                    <ul class="features">
+                        <li>30-60초 간단한 언급</li>
+                        <li>본편 흐름 유지</li>
+                        <li>브랜드 인지도 형성</li>
+                        <li>시안 1회 확인</li>
+                        <li>설명란 링크 포함</li>
+                    </ul>
+                    <div class="description">
+                        <strong>이런 경우 추천:</strong> 제한된 예산, 파일럿 테스트, 간단한 브랜드 노출을 원하실 때
+                    </div>
+                </div>
+            </div>
+            
+            <div class="evidence-section">
+                <h3 class="evidence-title">블링(Vling) 데이터 증거 자료</h3>
+                <p class="evidence-subtitle">아래는 실제 블링 플랫폼에서 조회한 TurtleSprint 채널의 광고 단가 데이터입니다</p>
+                
+                <div class="vling-visual">
+                    <div class="vling-visual-header">
+                        <span class="vling-mark">Vling</span>
+                        <span class="vling-visual-title">광고 영상 분석</span>
+                    </div>
+                    <div class="tab-buttons">
+                        <button type="button" class="tab-btn active" data-tab="general">일반</button>
+                        <button type="button" class="tab-btn" data-tab="shorts">쇼츠</button>
+                    </div>
+                    
+                    <!-- 일반 탭 테이블 -->
+                    <div id="general-table" class="tab-content" style="display: block;">
+                        <table class="analysis-table">
+                            <thead>
+                                <tr>
+                                    <th>영상 종류</th>
+                                    <th>평균 조회수</th>
+                                    <th>평균 좋아요 수</th>
+                                    <th>평균 댓글 수</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="type-col">일반</td>
+                                    <td class="value-col">12,659</td>
+                                    <td class="value-col">249</td>
+                                    <td class="value-col">59</td>
+                                </tr>
+                                <tr>
+                                    <td class="type-col">광고</td>
+                                    <td class="empty-col">-</td>
+                                    <td class="empty-col">-</td>
+                                    <td class="empty-col">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- 쇼츠 탭 테이블 -->
+                    <div id="shorts-table" class="tab-content" style="display: none;">
+                        <table class="analysis-table">
+                            <thead>
+                                <tr>
+                                    <th>영상 종류</th>
+                                    <th>평균 조회수</th>
+                                    <th>평균 좋아요 수</th>
+                                    <th>평균 댓글 수</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="type-col">일반</td>
+                                    <td class="value-col">7,568</td>
+                                    <td class="value-col">18</td>
+                                    <td class="value-col">3</td>
+                                </tr>
+                                <tr>
+                                    <td class="type-col">광고</td>
+                                    <td class="empty-col">-</td>
+                                    <td class="empty-col">-</td>
+                                    <td class="empty-col">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="evidence-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>광고 종류</th>
+                                <th>블링 데이터 범위</th>
+                                <th>CPV</th>
+                                <th>예상 조회수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>브랜디드</strong></td>
+                                <td>₩840,605 ~ ₩1,260,907</td>
+                                <td>₩107 ~ ₩160</td>
+                                <td>6,968</td>
+                            </tr>
+                            <tr>
+                                <td><strong>PPL</strong></td>
+                                <td>₩560,403 ~ ₩840,604</td>
+                                <td>₩71 ~ ₩107</td>
+                                <td>6,968</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Shorts</strong></td>
+                                <td>₩420,302 ~ ₩630,453</td>
+                                <td>₩29 ~ ₩42</td>
+                                <td>13,065</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>브랜디드 PPL</th>
+                            <th>기획 PPL</th>
+                            <th>쇼츠 PPL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>책정 금액 (중간값)</strong></td>
+                            <td>₩1,050,000</td>
+                            <td>₩700,000</td>
+                            <td>₩530,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>노출 시간</strong></td>
+                            <td>3-5분 이상</td>
+                            <td>2-3분</td>
+                            <td>30-60초</td>
+                        </tr>
+                        <tr>
+                            <td><strong>제작 투입도</strong></td>
+                            <td>높음 (전용 기획)</td>
+                            <td>중간 (통합 기획)</td>
+                            <td>낮음 (간단 삽입)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>예상 효과</strong></td>
+                            <td>브랜드 이미지 구축</td>
+                            <td>제품 이해도 상승</td>
+                            <td>인지도 형성</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="additional-terms">
+                <h4>공통 제공 사항</h4>
+                <ul>
+                    <li>모든 금액은 부가세 별도입니다</li>
+                    <li>설명란 링크 및 고정댓글 60일 유지 (쇼츠 PPL은 협의)</li>
+                    <li>D+14일 기준 5,000뷰 미달 시 커뮤니티 포스팅 1회 제공</li>
+                    <li>영상 업로드 전 최종 시안 확인 가능</li>
+                    <li>추가 요청사항은 별도 협의 가능</li>
+                </ul>
+            </div>
+            
+            <div class="cta-section">
+                <h2>어떤 광고 상품을 선택하시겠습니까?</h2>
+                <p>마케팅 목표와 예산에 맞는 최적의 상품을 선택해주세요</p>
+                <div class="contact-info">
+                    <p><strong>선택하신 상품 번호와 함께 회신 부탁드립니다</strong></p>
+                    <p class="option">1. 브랜디드 PPL (₩1,050,000)</p>
+                    <p class="option">2. 기획 PPL (₩700,000)</p>
+                    <p class="option">3. 쇼츠 PPL (₩530,000)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 페이지 로드 완료 후 실행
+        window.onload = function() {
+            // 모든 탭 버튼 가져오기
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const generalTable = document.getElementById('general-table');
+            const shortsTable = document.getElementById('shorts-table');
+            
+            // 각 버튼에 클릭 이벤트 추가
+            tabButtons.forEach(button => {
+                button.onclick = function() {
+                    // 모든 버튼에서 active 클래스 제거
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // 클릭한 버튼에 active 클래스 추가
+                    this.classList.add('active');
+                    
+                    // 어떤 탭인지 확인
+                    const tabName = this.getAttribute('data-tab');
+                    
+                    // 테이블 전환
+                    if (tabName === 'general') {
+                        generalTable.style.display = 'block';
+                        shortsTable.style.display = 'none';
+                    } else if (tabName === 'shorts') {
+                        generalTable.style.display = 'none';
+                        shortsTable.style.display = 'block';
+                    }
+                };
+            });
+        };
+    </script>
+</body>
+</html>
